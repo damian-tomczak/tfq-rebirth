@@ -139,7 +139,7 @@ typedef std::vector<GRASS_KIND> GRASS_KIND_VECTOR;
 
 inline uint1 QuadBias_FloatToByte(float x)
 {
-	return (uint1)(uint)minmax<int>(0, round((x * 0.25f + 0.5f) * 255.0f), 255);
+	return (uint1)(uint)minmax<int>(0, roundo((x * 0.25f + 0.5f) * 255.0f), 255);
 }
 
 
@@ -721,10 +721,10 @@ void Grass::Draw(const ParamsCamera &Cam, float GrassZFar, const COLORF &Color)
 
 	float PatchCX, PatchCZ;
 	PatchCX = PatchCZ = PATCH_SIZE * pimpl->m_TerrainObj->GetVertexDistance();
-	int x1 = minmax(0, round(floorf(NewCamBox.p1.x / PatchCX)), (int)pimpl->m_PatchesX-1);
-	int z1 = minmax(0, round(floorf(NewCamBox.p1.z / PatchCZ)), (int)pimpl->m_PatchesZ-1);
-	int x2 = minmax(0, round(ceilf(NewCamBox.p2.x / PatchCX)), (int)pimpl->m_PatchesX-1);
-	int z2 = minmax(0, round(ceilf(NewCamBox.p2.z / PatchCZ)), (int)pimpl->m_PatchesZ-1);
+	int x1 = minmax(0, roundo(floorf(NewCamBox.p1.x / PatchCX)), (int)pimpl->m_PatchesX-1);
+	int z1 = minmax(0, roundo(floorf(NewCamBox.p1.z / PatchCZ)), (int)pimpl->m_PatchesZ-1);
+	int x2 = minmax(0, roundo(ceilf(NewCamBox.p2.x / PatchCX)), (int)pimpl->m_PatchesX-1);
+	int z2 = minmax(0, roundo(ceilf(NewCamBox.p2.z / PatchCZ)), (int)pimpl->m_PatchesZ-1);
 	int x, z;
 	for (z = z1; z <= z2; z++)
 	{

@@ -5,7 +5,7 @@
  * License: GNU GPL
  */
 #include "..\Framework\pch.hpp"
-#include <hash_map>
+#include <unordered_map>
 #include "Framework.hpp"
 #include "D3dUtils.hpp"
 #include "Multishader.hpp"
@@ -21,7 +21,7 @@ class Multishader_pimpl
 {
 public:
 	// Hash => Dane wczytanego efektu
-	typedef stdext::hash_map<uint4, Multishader::SHADER_INFO> SHADER_MAP;
+	typedef std::unordered_map<uint4, Multishader::SHADER_INFO> SHADER_MAP;
 
 	string m_SourceFileName;
 	string m_CacheFileNameMask;
@@ -45,7 +45,7 @@ public:
 
 void Multishader_pimpl::FreeEffects()
 {
-	for (SHADER_MAP::reverse_iterator srit = m_Shaders.rbegin(); srit != m_Shaders.rend(); ++srit)
+	for (SHADER_MAP::iterator srit = m_Shaders.begin(); srit != m_Shaders.end(); ++srit)
 		SAFE_RELEASE(srit->second.Effect);
 	m_Shaders.clear();
 }

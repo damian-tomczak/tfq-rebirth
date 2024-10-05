@@ -1584,10 +1584,10 @@ void Terrain::CalcVisiblePatches(std::vector<uint> *OutPatchIndices, const FRUST
 	float PatchCX, PatchCZ;
 	PatchCX = PatchCZ = PATCH_SIZE * pimpl->m_VertexDistance;
 
-	int x1 = minmax(0, round(floorf(FrustumBox.p1.x / PatchCX)), (int)pimpl->m_PatchCX-1);
-	int z1 = minmax(0, round(floorf(FrustumBox.p1.z / PatchCZ)), (int)pimpl->m_PatchCZ-1);
-	int x2 = minmax(0, round(ceilf(FrustumBox.p2.x / PatchCX)), (int)pimpl->m_PatchCX-1);
-	int z2 = minmax(0, round(ceilf(FrustumBox.p2.z / PatchCZ)), (int)pimpl->m_PatchCZ-1);
+	int x1 = minmax(0, roundo(floorf(FrustumBox.p1.x / PatchCX)), (int)pimpl->m_PatchCX-1);
+	int z1 = minmax(0, roundo(floorf(FrustumBox.p1.z / PatchCZ)), (int)pimpl->m_PatchCZ-1);
+	int x2 = minmax(0, roundo(ceilf(FrustumBox.p2.x / PatchCX)), (int)pimpl->m_PatchCX-1);
+	int z2 = minmax(0, roundo(ceilf(FrustumBox.p2.z / PatchCZ)), (int)pimpl->m_PatchCZ-1);
 	int x, z, pi;
 	BOX PatchBox;
 	for (z = z1; z <= z2; z++)

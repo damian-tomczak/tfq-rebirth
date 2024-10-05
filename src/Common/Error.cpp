@@ -14,7 +14,7 @@
 #endif
 
 #ifdef USE_DIRECTX
-	#include <dxerr9.h>
+	#include <dxerr.h>
 	#include <D3DX9Mesh.h> // Dla ID3DXBuffer
 #endif
 
@@ -392,13 +392,11 @@ ErrnoError::ErrnoError(const string &msg, const string &file, int line)
 #ifdef USE_DIRECTX
 	DirectXError::DirectXError(HRESULT hr, const string &Msg, const string &File, int Line)
 	{
-		Push( "(DirectXError," + IntToStrR(hr) + ") " + string(DXGetErrorString9(hr)) + " (" + string(DXGetErrorDescription9(hr)) + ")" );
 		Push(Msg, File, Line);
 	}
 
 	DirectXError::DirectXError(HRESULT hr, ID3DXBuffer *Buf, const string &Msg, const string &File, int Line)
 	{
-		Push( "(DirectXError," + IntToStrR(hr) + ") " + string(DXGetErrorString9(hr)) + " (" + string(DXGetErrorDescription9(hr)) + ")" );
 		Push(Msg, File, Line);
 
 		string M;

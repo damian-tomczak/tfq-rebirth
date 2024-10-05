@@ -6,6 +6,7 @@
  */
 #include "PCH.hpp"
 #include <map>
+#include <typeinfo>
 #include <algorithm>
 #include "GlobalCode.hpp"
 #include "MapTask.hpp"
@@ -632,7 +633,7 @@ void BuildInterMapFromMesh(INTER_MAP &Out, const TMP_MESH &TmpMesh, const QMAP_D
 		else
 			MaterialDescs.push_back(mit->second.get());
 	}
-	
+
 	const string EmptyString;
 
 	// Dla ka¿dej œcianki

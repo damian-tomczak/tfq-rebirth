@@ -6,7 +6,8 @@
  */
 #include "PCH.hpp"
 #include <algorithm>
-#include "../External/NVMeshMender.h"
+#include <typeinfo>
+#include "..\..\doc\External\NVMeshMender.h"
 #include "GlobalCode.hpp"
 #include "MeshTask.hpp"
 
@@ -749,7 +750,7 @@ void LoadQmshTmpFile(tmp::QMSH *Out, const string &FileName)
 			tokenizer.Next();
 			break;
 		}
-		
+
 		tokenizer.AssertToken(Tokenizer::TOKEN_KEYWORD);
 		// mesh
 		if (tokenizer.GetId() == 2)
@@ -1898,7 +1899,7 @@ void LoadQmsh(QMSH &Qmsh, const string &FileName, const MeshJob &Job)
 	F.ReadEx(&SubmeshCount);
 	F.ReadEx(&BoneCount);
 	F.ReadEx(&AnimationCount);
-	
+
 	// Bry³y otaczaj¹ce
 	F.ReadEx(&Qmsh.BoundingSphereRadius);
 	F.ReadEx(&Qmsh.BoundingBox);
@@ -2307,7 +2308,7 @@ void FindObjectVertexRange(const QMSH &Qmsh, uint *OutVertexBeg, uint *OutVertex
 {
 	*OutVertexBeg = 0;
 	*OutVertexEnd = Qmsh.Vertices.size();
-	
+
 	if (!ObjectName.empty())
 	{
 		bool Found = false;

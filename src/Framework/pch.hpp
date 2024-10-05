@@ -34,7 +34,7 @@ using namespace common;
 //======================================
 // External
 
-#include "..\External\FastDelegate.h"
+#include "../../doc/External/FastDelegate.h"
 
 //======================================
 // C++

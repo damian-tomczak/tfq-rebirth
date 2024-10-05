@@ -419,10 +419,6 @@ void Application::HandleConsoleCommand()
 				Tok.AssertToken(Tokenizer::TOKEN_IDENTIFIER);
 				Cmd = Tok.GetString();
 				Tok.Next();
-
-				// Usuniête... :)
-				else
-					Tok.CreateError("Nieznane polecenie.");
 			}
 		}
 		catch (const Error &e)

@@ -933,7 +933,7 @@ void EngineServices::SetupState_Material(PASS Pass, const SCENE_DRAW_PARAMS &Sce
 				{
 					GUARD( "DiffuseColor", m_StartedEffect->SetVector(ShaderInfo.Params[MSP_DiffuseColor], &D3DXVECTOR4(OpMat->GetDiffuseColor().R, OpMat->GetDiffuseColor().G, OpMat->GetDiffuseColor().B, OpMat->GetDiffuseColor().A)) );
 				}
-			
+
 				if (Macros[MSM_TEXTURE_ANIMATION] == 1)
 				{
 					GUARD( "TextureMatrix", m_StartedEffect->SetMatrix(ShaderInfo.Params[MSP_TextureMatrix], &math_cast<D3DXMATRIX>(EntityDrawParams.TextureMatrix)) );
@@ -1468,7 +1468,7 @@ void RunningOptimizer::OnFrame(SETTINGS *OutNewSettings, float LastFrameTime)
 		int WorthFlip = (LastFrameTime < m_NormalFrameTimeSamples.GetAverage() ? 1 : -1);
 		m_FlipSums[m_SettingTestIndex] += WorthFlip;
 		m_FlipCounts[m_SettingTestIndex]++;
-		
+
 		// Jeœli zebra³o siê dostatecznie du¿o testów przestawiania tego ustawienia
 		if (m_FlipCounts[m_SettingTestIndex] == FLIP_TEST_COUNT)
 		{
@@ -1491,7 +1491,7 @@ void RunningOptimizer::OnFrame(SETTINGS *OutNewSettings, float LastFrameTime)
 	}
 
 	// Nowa klatka
-	
+
 	m_FrameNumber++;
 
 	// Jest eksperymentalna
@@ -1632,7 +1632,7 @@ void EntityOctree::RemoveEntity(Entity *e)
 	ENTITY_VECTOR::iterator eit = std::find(Node->Entities.begin(), Node->Entities.end(), e);
 	assert(eit != Node->Entities.end());
 	Node->Entities.erase(eit);
-	
+
 	// SprawdŸ, czy nie warto po³¹czyæ podwêz³ów wêz³a nadrzêdnego do tego
 	if (Node->Parent != NULL)
 		TryJoin(Node->Parent);
@@ -2049,7 +2049,7 @@ bool EntityOctree::RayCollision_Node(Entity **OutEntity, float *InOutT, ENTITY_O
 		// Kolizja optyczna i encja niewidoczna - pomiñ
 		if (Type == COLLISION_OPTICAL && !Node->Entities[ei]->GetWorldVisible())
 			continue;
-		
+
 		// Test z bounding sphere
 		SphereCenter = e->GetWorldPos();
 		SphereRadius = e->GetWorldRadius();
@@ -2392,7 +2392,7 @@ float PositionedLight::GetScissorRect(RECT *OutRect, const MATRIX &View, const M
 {
 	VEC3 ViewPoints[8], TransformedPoints[8];
 	const VEC3 *Points = GetBoundingBox();
-	
+
 	for (uint i = 0; i < 8; i++)
 		Transform(&ViewPoints[i], Points[i], View);
 
@@ -3328,10 +3328,10 @@ void TerrainRenderer::GetTreesInFrustum(TREE_DRAW_DESC_VECTOR *InOut, const Para
 	float PatchCX, PatchCZ;
 	PatchCX = PatchCZ = TERRAIN_PATCH_SIZE * m_Terrain->GetVertexDistance();
 
-	int x1 = minmax(0, round(floorf(FrustumBox.p1.x / PatchCX)), (int)m_TreePatchesX-1);
-	int z1 = minmax(0, round(floorf(FrustumBox.p1.z / PatchCZ)), (int)m_TreePatchesZ-1);
-	int x2 = minmax(0, round(ceilf(FrustumBox.p2.x / PatchCX)), (int)m_TreePatchesX-1);
-	int z2 = minmax(0, round(ceilf(FrustumBox.p2.z / PatchCZ)), (int)m_TreePatchesZ-1);
+	int x1 = minmax(0, roundo(floorf(FrustumBox.p1.x / PatchCX)), (int)m_TreePatchesX-1);
+	int z1 = minmax(0, roundo(floorf(FrustumBox.p1.z / PatchCZ)), (int)m_TreePatchesZ-1);
+	int x2 = minmax(0, roundo(ceilf(FrustumBox.p2.x / PatchCX)), (int)m_TreePatchesX-1);
+	int z2 = minmax(0, roundo(ceilf(FrustumBox.p2.z / PatchCZ)), (int)m_TreePatchesZ-1);
 	int x, z;
 	uint ti;
 	float TreeHalfWidth, TreeHalfHeight; BOX TreeBox;
@@ -3377,14 +3377,14 @@ void TerrainRenderer::GetTreesCastingDirectionalShadow(TREE_DRAW_DESC_VECTOR *In
 
 	float PatchCX, PatchCZ;
 	PatchCX = PatchCZ = TERRAIN_PATCH_SIZE * m_Terrain->GetVertexDistance();
-	
+
 	BOX ExtendedCamBox = CamBox;
 	ExtendedCamBox.Extend(2.0f); // HACK
 
-	int x1 = minmax(0, round(floorf(CamBox.p1.x / PatchCX)), (int)m_TreePatchesX-1);
-	int z1 = minmax(0, round(floorf(CamBox.p1.z / PatchCZ)), (int)m_TreePatchesZ-1);
-	int x2 = minmax(0, round(ceilf(CamBox.p2.x / PatchCX)), (int)m_TreePatchesX-1);
-	int z2 = minmax(0, round(ceilf(CamBox.p2.z / PatchCZ)), (int)m_TreePatchesZ-1);
+	int x1 = minmax(0, roundo(floorf(CamBox.p1.x / PatchCX)), (int)m_TreePatchesX-1);
+	int z1 = minmax(0, roundo(floorf(CamBox.p1.z / PatchCZ)), (int)m_TreePatchesZ-1);
+	int x2 = minmax(0, roundo(ceilf(CamBox.p2.x / PatchCX)), (int)m_TreePatchesX-1);
+	int z2 = minmax(0, roundo(ceilf(CamBox.p2.z / PatchCZ)), (int)m_TreePatchesZ-1);
 	int x, z;
 	uint ti;
 	float TreeHalfWidth, TreeHalfHeight; BOX TreeBox;
@@ -3589,7 +3589,7 @@ void TerrainRenderer::LoadTreeDensityMap(const string &FileName)
 					break;
 				}
 			}
-			
+
 			map_i++;
 		}
 	}
@@ -3612,7 +3612,7 @@ const TerrainRenderer::PATCH & TerrainRenderer::EnsurePatch(uint px, uint pz)
 			return *m_PatchCache[m_PatchCache.size()-1].get();
 		}
 	}
-	
+
 	////// Nie ma
 
 	// Wygeneruj
@@ -3922,7 +3922,7 @@ struct DRAW_DATA
 	std::vector<ENTITY_FRAGMENT> OpaqueEntityFragments;
 	// Fragmenty MaterialEntity materia³em Wireframe, Translucent oraz encje Custom w ca³oœci
 	std::vector<ENTITY_FRAGMENT> TranslucentEntityFragments;
-	
+
 	void SortOpaqueEntityFragmentsByMaterial();
 	// Sortuje od najdalszych do najbli¿szych
 	void SortTranslucentEntityFragmentssByDistance(const VEC3 &EyePos);
@@ -3958,8 +3958,7 @@ Scene::Scene(const BOX &Bounds) :
 	m_MapUseLighting(true),
 	m_MapCastShadow(true),
 	m_MapReceiveShadow(true),
-	m_WindVec(VEC2::ZERO),
-	m_CameraAnglesSaved(false)
+	m_WindVec(VEC2::ZERO)
 {
 }
 
@@ -4051,8 +4050,6 @@ void Scene::ResetTerrain()
 
 void Scene::SetActiveCamera(Camera *cam)
 {
-	if (cam != m_ActiveCamera)
-		m_CameraAnglesSaved = false;
 
 	if (cam == NULL)
 		m_ActiveCamera = NULL;
@@ -4219,7 +4216,7 @@ void Scene::Draw(STATS *OutStats)
 			if (SunVisibleFactor > 0.01f)
 				GetPpLensFlare()->Draw(SunVisibleFactor, ScreenCX, ScreenCY, m_ActiveCamera->GetMatrices().GetView(), m_ActiveCamera->GetMatrices().GetProj());
 		}
-		
+
 		// Postprocessing - efekt Texture
 		if (m_PpTexture != NULL)
 			m_PpTexture->Draw(ScreenCX, ScreenCY);
@@ -4251,7 +4248,7 @@ Scene::COLLISION_RESULT Scene::RayCollision(COLLISION_TYPE CollisionType, const 
 			}
 		}
 	}
-	
+
 	// Teren
 	if (m_TerrainRenderer != NULL)
 	{
@@ -4311,7 +4308,7 @@ void Scene::UnregisterEntity(Entity *e)
 	if (!m_Destroying)
 	{
 		m_Octree->RemoveEntity(e);
-		
+
 		ENTITY_SET::iterator eit = m_AllEntities.find(e);
 		assert(eit != m_AllEntities.end());
 		m_AllEntities.erase(eit);
@@ -4599,7 +4596,7 @@ void Scene::DoShadowMapping_Directional(DirectionalLight &directional_light, res
 			}
 			else
 				assert("WTF?! - DoShadowMapping_Directional, encja nie jest MaterialEntity ani TreeEntity.");
-		}	
+		}
 	}
 
 	// Drzewa z terenu
@@ -4804,7 +4801,7 @@ void Scene::DrawFullscreenQuad(uint4 ScreenCX, uint4 ScreenCY, bool FillPerturba
 		float Aspect = (float)ScreenCX / (float)ScreenCY;
 		const float PERTURBATION_MAP_SCALING = 1.5f; // Wzglêdem wysokoœci ekranu
 		const float PERTURBATION_MAP_SPEED = 0.1f;
-		
+
 		float PerturbationOffsetBase = frame::Timer1.GetTime() * PERTURBATION_MAP_SPEED;
 		VEC2 PerturbationOffset;
 
@@ -4821,7 +4818,7 @@ void Scene::DrawFullscreenQuad(uint4 ScreenCX, uint4 ScreenCY, bool FillPerturba
 		V[2].PerturbationTex[0].y = V[0].PerturbationTex[0].y + PERTURBATION_MAP_SCALING;
 		V[3].PerturbationTex[0].x = V[1].PerturbationTex[0].x;
 		V[3].PerturbationTex[0].y = V[2].PerturbationTex[0].y;
-		
+
 		PerturbationOffset = POISSON_DISC_2D[1] - VEC2(0.5f, 0.5f);
 		Normalize(&PerturbationOffset);
 		PerturbationOffset *= PerturbationOffsetBase;
@@ -5273,7 +5270,7 @@ void Scene::DrawAll(DRAW_DATA &DrawData, STATS *OutStats, const RunningOptimizer
 					// Wyznacz prostok¹t Scissor Test
 					RECT ScissorRect;
 					float ScissorRectPercent = point_light.GetScissorRect(&ScissorRect, m_ActiveCamera->GetMatrices().GetView(), m_ActiveCamera->GetMatrices().GetProj(), frame::Settings.BackBufferWidth, frame::Settings.BackBufferHeight);
-					
+
 					// Shadow Mapping - jeœli jest
 					res::D3dCubeTextureSurface *ShadowMap = NULL;
 					MATRIX ShadowMapMatrix;
@@ -5364,7 +5361,7 @@ void Scene::DrawAll(DRAW_DATA &DrawData, STATS *OutStats, const RunningOptimizer
 					// Odpal Scissor Test
 					ERR_GUARD_DIRECTX( frame::Dev->SetScissorRect(&ScissorRect) );
 					ERR_GUARD_DIRECTX( frame::Dev->SetRenderState(D3DRS_SCISSORTESTENABLE, TRUE) );
-					
+
 					// Fragmenty mapy do narysowania oœwietlone tym œwiat³em
 					// Wszystkie s¹ rysowane materia³em OpaqueMaterial.
 					if (m_QMapRenderer != NULL && GetMapUseLighting())
@@ -5515,7 +5512,7 @@ float Scene::QuerySunVisibleFactor(const ParamsCamera &Cam, const VEC3 &SunDir)
 
 	{
 		res::OcclusionQueries::Issue query_issue_obj(Query);
-		
+
 		frame::Dev->SetFVF(VERTEX_X::FVF);
 		frame::Dev->DrawPrimitiveUP(D3DPT_TRIANGLEFAN, 2, Vertices, sizeof(VERTEX_X));
 		frame::RegisterDrawCall(2);
@@ -5725,7 +5722,7 @@ void Engine::Draw()
 
 	if (m_ActiveScene != NULL)
 		m_ActiveScene->Draw(&m_Stats);
-	
+
 	ERR_CATCH_FUNC
 }
 

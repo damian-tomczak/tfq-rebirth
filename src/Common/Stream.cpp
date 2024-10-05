@@ -7,11 +7,7 @@
  * Kontakt: mailto:sawickiap@poczta.onet.pl , http://regedit.gamedev.pl/
  */
 #include "Base.hpp"
-#ifdef WIN32
-	#include <typeinfo.h>
-#else
-	#include <typeinfo>
-#endif
+#include <typeinfo>
 #include <memory.h> // dla memcpy
 #include "Error.hpp"
 #include "Stream.hpp"
@@ -135,7 +131,7 @@ size_t Stream::Skip(size_t MaxLength)
 	// Implementacja dla klasy Stream nie posiadaj¹cej kursora.
 	// Trzeba wczytywaæ dane po kawa³ku.
 	// MaxLength bêdzie zmniejszane. Oznacza liczbê pozosta³ych bajtów do pominiêcia.
-	
+
 	if (MaxLength == 0)
 		return 0;
 
@@ -816,7 +812,7 @@ void VectorStream::SetCapacity(size_t Capacity)
 {
 	if (Capacity < m_Size || Capacity == 0)
 		throw Error(Format("Nie mo¿na zmieniæ pojemnoœci strumienia VectorStream (rozmiar: #, ¿¹dana pojemnoœæ: #)") % m_Size % Capacity, __FILE__, __LINE__);
-	
+
 	if (Capacity != m_Capacity)
 		Reserve(Capacity);
 }
@@ -1158,7 +1154,7 @@ void CRC32_Calc::Write(const void *Data, size_t Size)
 uint CRC32_Calc::Calc(const void *Data, size_t DataLength)
 {
 	uint4 crc = 0xFFFFFFFF; // preconditioning sets non zero value
-	
+
 	// loop through the buffer and calculate CRC
 	for(uint4 i = 0; i < DataLength; ++i)
 	{
@@ -1290,7 +1286,7 @@ void MD5_Calc::Process(uint1 data[64])
     P( C, D, A, B,  7, 14, 0x676F02D9 );
     P( B, C, D, A, 12, 20, 0x8D2A4C8A );
 #undef F
-    
+
 #define F(x,y,z) (x ^ y ^ z)
     P( A, B, C, D,  5,  4, 0xFFFA3942 );
     P( D, A, B, C,  8, 11, 0x8771F681 );
@@ -1507,9 +1503,9 @@ size_t XorCoder::Read(void *Data, size_t Size)
 	while (Size > 0)
 	{
 		BlockSize = std::min(Size, BUFFER_SIZE);
-		
+
 		ReadSize = GetStream()->Read(&m_Buf[0], BlockSize);
-		
+
 		if (m_Key.size() == 1)
 		{
 			for (size_t i = 0; i < BlockSize; i++)

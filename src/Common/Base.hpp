@@ -1168,11 +1168,11 @@ inline float safe_acos(float x)
 
 // Zaokr¹gla liczbê, zamiast j¹ obcinaæ
 // Tak matematycznie, czyli do góry lub w dó³ zale¿nie od czêœci u³amkowej.
-inline int round(float x)
+inline int roundo(float x)
 {
 	return static_cast<int>(floorf(x+0.5f));
 }
-inline int round(double x)
+inline int roundo(double x)
 {
 	return static_cast<int>(floor(x+0.5));
 }

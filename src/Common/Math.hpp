@@ -2465,7 +2465,7 @@ public:
 	void SetZNear(float ZNear) { m_ZNear = ZNear; }
 	void SetZFor (float ZFar)  { m_ZFar = ZFar; }
 	void SetFovAndAspect(float FovY, float Aspect);
-	
+
 	// Kompletnie wype³nia
 	void Set(const VEC3 &Eye, const VEC3 &Forward, const VEC3 &Up, const VEC3 &Right, float FovY, float Aspect, float ZNear, float ZFar) { SetProjection(FovY, Aspect, ZNear, ZFar); SetView(Eye, Forward, Up, Right); }
 	// Wype³nia jedn¹ po³ówkê danych
